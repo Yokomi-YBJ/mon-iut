@@ -1,0 +1,368 @@
+/* ===== RESET CSS ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== VARIABLES GLOBALES ===== */
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --success-color: #27ae60;
+  --light-bg: #ecf0f1;
+  --dark-text: #2c3e50;
+  --border-color: #bdc3c7;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* ===== MISE EN PAGE GÉNÉRALE ===== */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== BARRE DE NAVIGATION ===== */
+.navbar {
+  background-color: var(--primary-color);
+  padding: 0;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 20px 15px;
+  display: block;
+  transition: var(--transition);
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: var(--secondary-color);
+  border-bottom-color: var(--accent-color);
+}
+
+/* ===== CONTENU PRINCIPAL ===== */
+.main-content {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+  width: 100%;
+  flex: 1;
+}
+
+.container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+/* ===== TITRES ===== */
+h1 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-bottom: 3px solid var(--secondary-color);
+  padding-bottom: 10px;
+}
+
+h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin: 25px 0 15px 0;
+}
+
+h3 {
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+  margin: 20px 0 10px 0;
+}
+
+h4 {
+  color: var(--dark-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* ===== FORMULAIRES ===== */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+textarea {
+  resize: vertical;
+  font-family: "Courier New", monospace;
+  min-height: 150px;
+}
+
+/* ===== BOUTONS ===== */
+button,
+input[type="submit"] {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active,
+input[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.button-secondary {
+  background-color: var(--accent-color);
+}
+
+.button-secondary:hover {
+  background-color: #c0392b;
+}
+
+.button-success {
+  background-color: var(--success-color);
+}
+
+.button-success:hover {
+  background-color: #229954;
+}
+
+/* ===== ONGLETS ===== */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--light-bg);
+  flex-wrap: wrap;
+}
+
+.tabs-btn {
+  background-color: transparent;
+  color: var(--dark-text);
+  border: 2px solid var(--light-bg);
+  padding: 12px 20px;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: none;
+  font-weight: 500;
+}
+
+.tabs-btn:hover {
+  background-color: var(--light-bg);
+  transform: none;
+  box-shadow: none;
+}
+
+.tabs-btn.active {
+  background-color: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+  box-shadow: none;
+}
+
+/* ===== CONTENU DES ONGLETS ===== */
+.tabs-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tabs-content.active {
+  display: block;
+}
+
+.btn-content {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn-content.active {
+  display: flex;
+}
+
+/* ===== SECTIONS ===== */
+.filiere,
+.parcours-section,
+.form-section {
+  background-color: var(--light-bg);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--secondary-color);
+}
+
+/* ===== LISTES ===== */
+ul,
+ol {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* ===== LIGNES SÉPARATRICES ===== */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 20px 0;
+}
+
+/* ===== LIENS ===== */
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .nav-links a {
+    padding: 15px;
+    border-bottom: none;
+    border-left: 4px solid transparent;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    border-left-color: var(--accent-color);
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-content {
+    margin: 15px auto;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="file"],
+  select,
+  textarea {
+    margin-bottom: 12px;
+  }
+
+  button,
+  input[type="submit"] {
+    width: 100%;
+  }
+}

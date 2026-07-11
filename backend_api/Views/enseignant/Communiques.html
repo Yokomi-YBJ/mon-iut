@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Communiqués</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- BARRE DE NAVIGATION -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-title">📚 Plateforme Pédagogique</div>
+        <ul class="nav-links">
+          <li><a href="Integration.html">Accueil</a></li>
+          <li><a href="note.html">Notes</a></li>
+          <li><a href="CC.html">CC</a></li>
+          <li><a href="Senthese.html">Synthèse</a></li>
+          <li><a href="Rattrapage.html">Rattrapage</a></li>
+          <li><a href="td.html">TD</a></li>
+          <li><a href="Communiques.html" class="active">Communiqués</a></li>
+          <li><a href="api/deconnexion.php">Deconnexion</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="container">
+        <h1>📢 Communiqués</h1>
+
+        <div class="form-section">
+          <h2>Envoyer un Communiqué</h2>
+          <form id="communiqueForm">
+            <label for="titre">Titre (optionnel):</label>
+            <input
+              type="text"
+              id="titre"
+              name="titre"
+              placeholder="Titre du communiqué"
+            />
+
+            <label for="message">Message:</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tapez votre communiqué ici..."
+              required
+            ></textarea>
+
+            <label for="filiere">Destinataires (Filière):</label>
+            <select id="filiere" name="filiere" required>
+              <option value="">-- Sélectionner une filière --</option>
+              <option value="glo">GLO - Génie Logiciel</option>
+              <option value="rt">RT - Réseaux & Télécommunications</option>
+              <option value="ia">IA - Intelligence Artificielle</option>
+              <option value="iab">IAB - IA & Big Data</option>
+              <option value="mip">MIP - Mathématiques & Informatique</option>
+              <option value="tous">Tous les étudiants</option>
+            </select>
+
+            <button type="submit" class="button-success">📤 Envoyer</button>
+            <div id="communiqueMessage" style="margin-top: 10px"></div>
+          </form>
+        </div>
+
+        <hr />
+
+        <h2>Historique des Communiqués</h2>
+        <div class="filiere" id="historiqueDiv">
+          <p>Chargement des communiqués...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Envoyer un communiqué
+      document
+        .getElementById("communiqueForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData();
+          formData.append(
+            "titre",
+            document.getElementById("titre").value || "Communiqué",
+          );
+          formData.append("message", document.getElementById("message").value);
+          formData.append("filiere", document.getElementById("filiere").value);
+
+          try {
+            const response = await fetch("api/communiques.php?action=send", {
+              method: "POST",
+              body: formData,
+            });
+            const data = await response.json();
+
+            const messageDiv = document.getElementById("communiqueMessage");
+            messageDiv.style.color = data.success ? "#27ae60" : "#e74c3c";
+            messageDiv.textContent = data.message;
+
+            if (data.success) {
+              document.getElementById("communiqueForm").reset();
+              loadCommuniques();
+            }
+          } catch (error) {
+            alert("Erreur: " + error.message);
+          }
+        });
+
+      // Charger l'historique des communiqués
+      async function loadCommuniques() {
+        try {
+          const response = await fetch("api/communiques.php?action=list");
+          const data = await response.json();
+
+          const historiqueDiv = document.getElementById("historiqueDiv");
+
+          if (data.success && data.data.length > 0) {
+            let html =
+              '<div style="display: flex; flex-direction: column; gap: 15px;">';
+
+            data.data.forEach((notif) => {
+              html +=
+                '<div style="border-left: 4px solid #3498db; padding: 15px; background: #ecf0f1; border-radius: 5px;">';
+              html += "<h4>" + (notif.titre || "Sans titre") + "</h4>";
+              html += "<p>" + notif.contenu + "</p>";
+              html +=
+                '<small style="color: #666;">Envoyé le: ' +
+                new Date(notif.date_envoi).toLocaleDateString("fr-FR") +
+                "</small>";
+              html += "</div>";
+            });
+
+            html += "</div>";
+            historiqueDiv.innerHTML = html;
+          } else {
+            historiqueDiv.innerHTML = "<p>Aucun communiqué pour le moment.</p>";
+          }
+        } catch (error) {
+          console.error("Erreur:", error);
+          document.getElementById("historiqueDiv").innerHTML =
+            '<p style="color: #e74c3c;">Erreur lors du chargement des communiqués.</p>';
+        }
+      }
+
+      // Charger les communiqués au chargement de la page
+      window.addEventListener("load", loadCommuniques);
+    </script>
+  </body>
+</html>

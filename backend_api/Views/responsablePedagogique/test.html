@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            /* Pour que les 3 blocs aient la même largeur */
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .btn-redirect {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn-redirect:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h2>Bienvenue, Monsieur Diallo !</h2>
+            <p>C'est un plaisir de vous revoir parmi nous aujourd'hui.</p>
+        </div>
+
+        <div class="card">
+            <h2>Votre Espace</h2>
+            <p>Ici, vous pouvez consulter vos dernières activités et gérer vos projets en cours.</p>
+        </div>
+
+        <div class="card">
+            <h2>Navigation</h2>
+            <p>Prêt à passer à l'étape suivante ?</p>
+            <a href="autre-page.html" class="btn-redirect">Accéder au Dashboard</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

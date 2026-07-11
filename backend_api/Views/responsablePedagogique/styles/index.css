@@ -1,0 +1,274 @@
+     :root {
+            --primary-color: #1877f2; /* Bleu Facebook */
+            --primary-light: #e7f3ff;
+            --secondary-color: #fff;
+            --text-color-dark: #333;
+            --text-color-light: #555;
+            --border-color: #ddd;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f3f4f6;
+            color: var(--text-color-dark);
+            display: flex;
+            min-height: 100vh;
+        
+        }
+
+        /* --- Barre de menu verticale --- */
+        .sidebar {
+            width: 250px;
+            background-color: #1e1b4b;
+            padding: 20px;
+            box-shadow: 2px 0 5px #1f2937;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+        }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            color: #ea580c;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-header p {
+            color: #f3f4f6;
+        }
+        .sidebar-menu {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: #f3f4f6;
+            font-size: 1.1rem;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: #ea580c;
+            color: #f3f4f6;
+            font-weight: 500;
+        }
+
+        .logout-link {
+            border-top: 1px solid #f3f4f6;
+            padding-top: 20px;
+        }
+
+        .logout-link a {
+            text-decoration: none;
+            color: #f3f4f6;
+            font-size: 1.1rem;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;      
+        }
+
+        .logout-link a:hover {
+            background-color: rgba(255, 0, 0, 0.65);
+            color: white;
+            font-weight: 500;
+        }
+
+       .logout-lin {
+            border-top: 1px solid #f3f4f6;
+            padding-top: 20px;
+        }
+        
+       .logout-lin a {
+            text-decoration: none;
+            color: #f3f4f6;
+            font-size: 1.1rem;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .logout-lin a:hover {
+            background-color: rgba(45, 243, 88, 0.65);
+            color: white;
+            font-weight: 500;
+        }
+
+        /* --- Contenu principal --- */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        @media (min-width: 768px) {
+             .sidebar {
+                 transform: translateX(0);
+            }
+             .main-content {
+                 margin-left: 250px;
+            }
+        }
+
+
+        /* --- Tableau des tâches --- */
+        .task-list {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .task-table th, .task-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .task-table th {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-color-light);
+            text-transform: uppercase;
+        }
+        
+        .task-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .task-table tbody tr:hover {
+            background-color: var(--primary-light);
+        }
+
+        .task-description {
+            font-weight: 500;
+        }
+
+        .task-date {
+            color: var(--text-color-light);
+            white-space: nowrap;
+        }
+
+        .task-actions {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .btn-complete {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-complete:hover {
+            background-color: #166fe5;
+        }
+        /* --- Responsive Design pour le tableau --- */
+        @media (max-width: 768px) {
+            .task-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .task-table thead, .task-table tbody, .task-table th, .task-table td, .task-table tr {
+                display: block;
+            }
+
+            .task-table thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .task-table tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+            }
+
+            .task-table td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: left;
+            }
+
+            .task-table td:before {
+                position: absolute;
+                top: 50%;
+                left: 15px;
+                transform: translateY(-50%);
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: 500;
+                color: var(--text-color-light);
+                content: attr(data-label);
+            }
+
+            .task-table td:nth-of-type(1):before { content: "Tâche"; }
+            .task-table td:nth-of-type(2):before { content: "Date de fin"; }
+            .task-table td:nth-of-type(3):before { content: "Action"; }
+        }
+        .pourcent{
+            position: absolute;
+            background-color: white;
+            width: 50%;
+            padding: 25px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border-radius: 10px;
+            font-size: 18px;
+            bottom: 25px;
+            right: 25px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--text-color-light);
+        }
+        .pourcent span:nth-of-type(2){
+            color: var(--primary-color);
+            font-size: 30px;
+            margin-left: 5px;
+        }

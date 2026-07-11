@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen de Rattrapage</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- BARRE DE NAVIGATION -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-title">📚 Plateforme Pédagogique</div>
+        <ul class="nav-links">
+          <li><a href="Integration.html">Accueil</a></li>
+          <li><a href="note.html">Notes</a></li>
+          <li><a href="CC.html">CC</a></li>
+          <li><a href="Senthese.html">Synthèse</a></li>
+          <li><a href="Rattrapage.html" class="active">Rattrapage</a></li>
+          <li><a href="td.html">TD</a></li>
+          <li><a href="Communiques.html">Communiqués</a></li>
+          <li><a href="api/deconnexion.php">Deconnexion</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="container">
+        <h1>🔄 Examen de Rattrapage</h1>
+
+        <div class="form-section">
+          <h2>Sélectionner une Filière</h2>
+          <p>Choisissez la filière concernée par l'examen de rattrapage:</p>
+
+          <form action="post">
+            <label for="filiere">Filière:</label>
+            <select id="filiere" name="filiere" required>
+              <option value="">-- Sélectionner une filière --</option>
+              <option value="glo">GLO - Génie Logiciel</option>
+              <option value="rt">RT - Réseaux & Télécommunications</option>
+              <option value="ia">IA - Intelligence Artificielle</option>
+              <option value="iab">IAB - IA & Big Data</option>
+              <option value="mip">MIP - Mathématiques & Informatique</option>
+            </select>
+
+            <button type="submit" class="button-success">✓ Continuer</button>
+          </form>
+        </div>
+
+        <hr />
+
+        <div class="filiere">
+          <h3>ℹ️ Information</h3>
+          <p>Utilisez cette section pour:</p>
+          <ul>
+            <li>Gérer les résultats de rattrapage</li>
+            <li>Envoyer les notes de rattrapage</li>
+            <li>Consulter les listes d'étudiants</li>
+            <li>Générer des rapports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

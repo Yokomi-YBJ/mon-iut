@@ -1,0 +1,202 @@
+/* css/etudiants.css */
+
+.admin-card {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+}
+
+.card-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--light-bg);
+    padding-bottom: 10px;
+}
+
+.card-header h3 {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+}
+
+.card-header p {
+    color: var(--text-grey);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* --- Formulaires --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.four-cols {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.form-group input, 
+.form-group select {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 2px rgba(249, 118, 22, 0.1);
+}
+
+.form-group input:disabled, 
+.form-group select:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.form-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-primary {
+    background-color: var(--primary-orange);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-secondary {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #e6660b; /* Orange un peu plus sombre */
+}
+
+/* --- Filtre Box --- */
+.filter-box {
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e6ed;
+}
+
+/* --- Tableaux --- */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th, 
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background-color: #f8f9fa;
+    color: var(--primary-blue);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.data-table tbody tr:hover {
+    background-color: #fdfdfd;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Boutons d'action dans le tableau */
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-left: 5px;
+    transition: opacity 0.2s;
+}
+
+.btn-edit {
+    background-color: #e0f2fe;
+    color: #0284c7;
+}
+
+.btn-delete {
+    background-color: #fee2e2;
+    color: var(--danger);
+}
+
+.action-btn:hover {
+    opacity: 0.8;
+}
+
+/* Styles spécifiques pour la page gestion_profs */
+.layout-grid { display: grid; grid-template-columns: 420px 1fr; gap: 24px; align-items: start; }
+.admin-card { padding: 20px; }
+.etudiants-table { width: 100%; border-collapse: collapse; }
+.etudiants-table th, .etudiants-table td { padding: 12px 10px; border-bottom: 1px solid #e6eef6; }
+.etudiants-table thead th { background: #f1f5f9; color: #0f172a; font-weight: 700; }
+.etudiants-table tbody tr:hover { background: #fbfdff; }
+.etudiants-table td strong { display: block; font-size: 0.98rem; }
+
+.box-filter { padding: 12px; }
+.multiselect-container { background: #fff; border: 1px solid #e6eef6; }
+
+.btn-edit { padding: 8px 10px; border-radius: 6px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .layout-grid { grid-template-columns: 1fr; }
+    .layout-grid section { order: 0; }
+}
+
+/* Small helpers */
+.muted { color: #64748b; font-size: 0.9rem; }
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+    .four-cols {
+        grid-template-columns: 1fr; /* Une colonne sur mobile */
+    }
+}

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des Notes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- BARRE DE NAVIGATION -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-title">📚 Plateforme Pédagogique</div>
+        <ul class="nav-links">
+          <li><a href="Integration.html">Accueil</a></li>
+          <li><a href="note.html" class="active">Notes</a></li>
+          <li><a href="CC.html">CC</a></li>
+          <li><a href="Senthese.html">Synthèse</a></li>
+          <li><a href="Rattrapage.html">Rattrapage</a></li>
+          <li><a href="td.html">TD</a></li>
+          <li><a href="Communiques.html">Communiqués</a></li>
+          <li><a href="api/deconnexion.php">Deconnexion</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="container">
+        <h1>📊 Gestion des Notes</h1>
+
+        <div class="form-section">
+          <h2>Ajouter une Note</h2>
+          <form id="noteForm">
+            <label for="etudiant">Nom de l'Étudiant:</label>
+            <input
+              type="text"
+              id="etudiant"
+              name="etudiant"
+              placeholder="Ex: Jean Dupont"
+              required
+            />
+
+            <label for="matricule">Matricule:</label>
+            <input
+              type="text"
+              id="matricule"
+              name="matricule"
+              placeholder="Ex: 2024001"
+              required
+            />
+
+            <label for="matiere">Matière:</label>
+            <input
+              type="text"
+              id="matiere"
+              name="matiere"
+              placeholder="Ex: Mathématiques"
+              required
+            />
+
+            <label for="note">Note:</label>
+            <input
+              type="number"
+              id="note"
+              name="note"
+              step="0.01"
+              min="0"
+              max="20"
+              placeholder="Ex: 15.5"
+              required
+            />
+
+            <label for="type">Type d'Évaluation:</label>
+            <select id="type" name="type" required>
+              <option value="">-- Sélectionner --</option>
+              <option value="cc">Contrôle Continu (CC)</option>
+              <option value="synthese">Examen de Synthèse</option>
+              <option value="rattrapage">Examen de Rattrapage</option>
+            </select>
+
+            <button type="submit" class="button-success">
+              ✓ Ajouter la Note
+            </button>
+            <div id="noteFormMessage" style="margin-top: 10px"></div>
+          </form>
+        </div>
+
+        <hr />
+
+        <h2>Consulter les Notes</h2>
+        <div class="form-section">
+          <label for="matricule-search">Rechercher par Matricule:</label>
+          <input
+            type="text"
+            id="matricule-search"
+            placeholder="Entrez le matricule de l'étudiant"
+          />
+          <button type="button" class="button-success" onclick="searchNotes()">
+            🔍 Rechercher
+          </button>
+          <div id="searchResults" style="margin-top: 20px"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Ajouter une note
+      document
+        .getElementById("noteForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData();
+          formData.append(
+            "etudiant",
+            document.getElementById("etudiant").value,
+          );
+          formData.append(
+            "matricule",
+            document.getElementById("matricule").value,
+          );
+          formData.append("matiere", document.getElementById("matiere").value);
+          formData.append("note", document.getElementById("note").value);
+          formData.append("type", document.getElementById("type").value);
+
+          try {
+            const response = await fetch("api/notes.php?action=add", {
+              method: "POST",
+              body: formData,
+            });
+            const data = await response.json();
+
+            const messageDiv = document.getElementById("noteFormMessage");
+            messageDiv.style.color = data.success ? "#27ae60" : "#e74c3c";
+            messageDiv.textContent = data.message;
+
+            if (data.success) {
+              document.getElementById("noteForm").reset();
+            }
+          } catch (error) {
+            alert("Erreur: " + error.message);
+          }
+        });
+
+      // Rechercher les notes
+      async function searchNotes() {
+        const matricule = document.getElementById("matricule-search").value;
+
+        if (!matricule.trim()) {
+          alert("Veuillez entrer un matricule");
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            "api/notes.php?action=search&matricule=" +
+              encodeURIComponent(matricule),
+          );
+          const data = await response.json();
+
+          const resultsDiv = document.getElementById("searchResults");
+
+          if (data.success) {
+            let html =
+              '<h3>Résultats:</h3><table style="width: 100%; border-collapse: collapse;">';
+            html +=
+              '<tr style="background: #3498db; color: white;"><th style="padding: 10px; border: 1px solid #ccc;">Étudiant</th><th style="padding: 10px; border: 1px solid #ccc;">Matière</th><th style="padding: 10px; border: 1px solid #ccc;">Note CC</th><th style="padding: 10px; border: 1px solid #ccc;">Sémestre</th></tr>';
+
+            data.data.forEach((note) => {
+              html +=
+                '<tr><td style="padding: 10px; border: 1px solid #ccc;">' +
+                note.nom +
+                " " +
+                note.prenom +
+                "</td>";
+              html +=
+                '<td style="padding: 10px; border: 1px solid #ccc;">' +
+                note.nom_matiere +
+                "</td>";
+              html +=
+                '<td style="padding: 10px; border: 1px solid #ccc;">' +
+                (note.note_cc || "-") +
+                "</td>";
+              html +=
+                '<td style="padding: 10px; border: 1px solid #ccc;">' +
+                note.semestre +
+                "</td></tr>";
+            });
+
+            html += "</table>";
+            resultsDiv.innerHTML = html;
+          } else {
+            resultsDiv.innerHTML =
+              '<p style="color: #e74c3c;">' + data.message + "</p>";
+          }
+        } catch (error) {
+          alert("Erreur: " + error.message);
+        }
+      }
+    </script>
+  </body>
+</html>

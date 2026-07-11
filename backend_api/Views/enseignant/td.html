@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fiches TD</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- BARRE DE NAVIGATION -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-title">📚 Plateforme Pédagogique</div>
+        <ul class="nav-links">
+          <li><a href="Integration.html">Accueil</a></li>
+          <li><a href="note.html">Notes</a></li>
+          <li><a href="CC.html">CC</a></li>
+          <li><a href="Senthese.html">Synthèse</a></li>
+          <li><a href="Rattrapage.html">Rattrapage</a></li>
+          <li><a href="td.html" class="active">TD</a></li>
+          <li><a href="Communiques.html">Communiqués</a></li>
+          <li><a href="api/deconnexion.php">Deconnexion</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="container">
+        <h1>📄 Fiches TD</h1>
+
+        <div class="form-section">
+          <h2>Envoyer une Fiche TD</h2>
+          <form id="tdForm" enctype="multipart/form-data">
+            <label for="titre">Titre du TD:</label>
+            <input
+              type="text"
+              id="titre"
+              name="titre"
+              placeholder="Ex: TD 1 - Algèbre"
+              required
+            />
+
+            <label for="filiere">Filière cible:</label>
+            <select id="filiere" name="filiere" required>
+              <option value="">-- Sélectionner une filière --</option>
+              <option value="glo">GLO - Génie Logiciel</option>
+              <option value="rt">RT - Réseaux & Télécommunications</option>
+              <option value="ia">IA - Intelligence Artificielle</option>
+              <option value="iab">IAB - IA & Big Data</option>
+              <option value="mip">MIP - Mathématiques & Informatique</option>
+              <option value="tous">Tous</option>
+            </select>
+
+            <label for="type">Type de document:</label>
+            <select id="type" name="type" required>
+              <option value="COURS">Cours</option>
+              <option value="STAGE">Stage</option>
+              <option value="EDT">Emploi du temps</option>
+            </select>
+
+            <label for="fichier"
+              >Sélectionner le fichier (PDF, DOC, DOCX, PPTX):</label
+            >
+            <input
+              type="file"
+              id="fichier"
+              name="fichier"
+              accept=".pdf,.doc,.docx,.pptx"
+              required
+            />
+
+            <button type="submit" class="button-success">📤 Envoyer</button>
+            <div id="uploadMessage" style="margin-top: 10px"></div>
+          </form>
+        </div>
+
+        <hr />
+
+        <h2>Fiches TD Disponibles</h2>
+        <div class="filiere" id="documentsList">
+          <p>Chargement des documents...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Upload un document
+      document
+        .getElementById("tdForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData();
+          formData.append("titre", document.getElementById("titre").value);
+          formData.append("filiere", document.getElementById("filiere").value);
+          formData.append("type", document.getElementById("type").value);
+          formData.append(
+            "fichier",
+            document.getElementById("fichier").files[0],
+          );
+
+          try {
+            const response = await fetch("api/documents.php?action=upload", {
+              method: "POST",
+              body: formData,
+            });
+            const data = await response.json();
+
+            const messageDiv = document.getElementById("uploadMessage");
+            messageDiv.style.color = data.success ? "#27ae60" : "#e74c3c";
+            messageDiv.textContent = data.message;
+
+            if (data.success) {
+              document.getElementById("tdForm").reset();
+              loadDocuments();
+            }
+          } catch (error) {
+            alert("Erreur: " + error.message);
+          }
+        });
+
+      // Charger la liste des documents
+      async function loadDocuments() {
+        try {
+          const response = await fetch("api/documents.php?action=list");
+          const data = await response.json();
+
+          const documentsList = document.getElementById("documentsList");
+
+          if (data.success && data.data.length > 0) {
+            let html =
+              '<table style="width: 100%; border-collapse: collapse;">';
+            html +=
+              '<tr style="background: #3498db; color: white;"><th style="padding: 10px; border: 1px solid #ccc;">Titre</th><th style="padding: 10px; border: 1px solid #ccc;">Type</th><th style="padding: 10px; border: 1px solid #ccc;">Date</th><th style="padding: 10px; border: 1px solid #ccc;">Action</th></tr>';
+
+            data.data.forEach((doc) => {
+              const dateObj = new Date(doc.date_publication);
+              const dateStr = dateObj.toLocaleDateString("fr-FR");
+              html += '<tr style="border: 1px solid #ccc;">';
+              html +=
+                '<td style="padding: 10px; border: 1px solid #ccc;">' +
+                doc.titre +
+                "</td>";
+              html +=
+                '<td style="padding: 10px; border: 1px solid #ccc;">' +
+                doc.type_doc +
+                "</td>";
+              html +=
+                '<td style="padding: 10px; border: 1px solid #ccc;">' +
+                dateStr +
+                "</td>";
+              html +=
+                '<td style="padding: 10px; border: 1px solid #ccc;"><a href="' +
+                doc.url_fichier +
+                '" target="_blank" style="color: #3498db;">📥 Télécharger</a></td>';
+              html += "</tr>";
+            });
+
+            html += "</table>";
+            documentsList.innerHTML = html;
+          } else {
+            documentsList.innerHTML =
+              "<p>Aucun document disponible pour le moment.</p>";
+          }
+        } catch (error) {
+          console.error("Erreur:", error);
+          document.getElementById("documentsList").innerHTML =
+            '<p style="color: #e74c3c;">Erreur lors du chargement des documents.</p>';
+        }
+      }
+
+      // Charger les documents au chargement de la page
+      window.addEventListener("load", loadDocuments);
+    </script>
+  </body>
+</html>
