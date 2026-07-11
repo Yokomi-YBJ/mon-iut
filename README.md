@@ -34,7 +34,7 @@ Mon IUT est une plateforme numérique destinée à l'IUT de Ngaoundéré, au Cam
 
 ### 1.2 Le problème résolu
 
-Avant cette application, les informations étaient dispersées : emplois du temps papier, notes affichées sur des tableaux physiques, communiqués distribués à la main. Mon IUT centralise toutes ces informations dans une seule application, consultable même sans connexion internet pour certains contenus déjà téléchargés.
+Avant cette application, les informations étaient dispersées : emplois du temps papier, notes affichées sur des tableaux physiques, communiqués envoyé via whatsapp. Mon IUT centralise toutes ces informations dans une seule application, consultable même sans connexion internet pour certains contenus déjà téléchargés.
 
 ### 1.3 Fonctionnalités côté étudiant (mobile)
 
@@ -701,3 +701,17 @@ Pour tout nouveau développement sur ce projet, il est recommandé de suivre les
 | mysqli | Extension PHP plus ancienne pour l'accès à MySQL, encore présente dans certaines parties du projet. |
 | Expo | Ensemble d'outils qui simplifie le développement d'applications React Native. |
 | JSON | Format d'échange de données texte utilisé entre le backend et l'application mobile. |
+
+---
+
+## 15. Contribuer au projet
+
+Ce projet est open source et accepte les contributions externes. Le dépôt officiel est protégé : toute modification passe par un fork et une pull request, aucun push direct sur `main` n'est autorisé.
+
+La procédure complète (fork, branche, tests, pull request) est décrite dans le fichier `CONTRIBUTING.md` à la racine du dépôt.
+
+Dépôt : https://github.com/Yokomi-YBJ/mon-iut
+
+## 16. Licence
+
+Ce projet est distribué sous licence MIT. Le texte complet se trouve dans le fichier `LICENSE` à la racine du dépôt. En résumé, chacun est libre d'utiliser, modifier, distribuer ce code, y compris à des fins commerciales, à condition de conserver la mention de copyright et la licence dans les copies du logiciel.
