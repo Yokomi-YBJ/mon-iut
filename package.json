@@ -1,0 +1,24 @@
+{
+  "name": "mon-iut",
+  "version": "2.0.0",
+  "description": "Monorepo de la plateforme académique Mon IUT : Backend Express.js unifié, Web (Admin, Enseignant, Responsable) et Mobile Étudiant",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend/web",
+    "frontend/mobile"
+  ],
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:web": "npm --prefix frontend/web run dev",
+    "dev:mobile": "npm --prefix frontend/mobile start",
+    "build:web": "npm --prefix frontend/web run build",
+    "test": "npm --prefix backend test",
+    "init-db": "npm --prefix backend run init-db",
+    "lint": "npm --prefix backend run lint && npm --prefix frontend/web run lint",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.5.0"
+  }
+}
