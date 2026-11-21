@@ -1,44 +1,39 @@
 ## Description
 
-Décrivez de manière concise et claire l'objectif et les modifications apportées par cette Pull Request.
+Décris clairement ce que fait cette pull request.
 
 ## Type de changement
 
-- [ ] Correction de bug (fix)
-- [ ] Nouvelle fonctionnalité (feat)
-- [ ] Refactorisation de code (sans impact fonctionnel)
-- [ ] Tests automatisés (Jest / Supertest)
-- [ ] Documentation (docs)
-- [ ] Configuration de déploiement (Render / Vercel / TiDB)
+- [ ] Correction de bug
+- [ ] Nouvelle fonctionnalité
+- [ ] Documentation
+- [ ] Refactorisation (aucun changement de comportement)
+- [ ] Autre (précise) :
 
 ## Zone concernée
 
-- [ ] Backend Express.js (`server.js`, routes, controllers, models, middlewares, services)
-- [ ] Backend Web modules (`backend/web/`)
-- [ ] Backend Mobile modules (`backend/mobile/`)
-- [ ] Frontend Web React (`frontend/web/`)
-- [ ] Application Mobile Expo (`frontend/mobile/`)
-- [ ] Base de données (schéma, script `init-db.js`)
+- [ ] Backend PHP (Controllers)
+- [ ] Backend PHP (Views admin)
+- [ ] Backend PHP (Views enseignant)
+- [ ] Backend PHP (Views responsable pédagogique)
+- [ ] Base de données (structure ou migration)
+- [ ] Application mobile
 
 ## Comment tester
 
-Décrivez les étapes pas-à-pas pour reproduire le scénario de test en local :
+Explique les étapes pour vérifier que ton changement fonctionne.
 
-1. Démarrer le backend avec `npm --prefix backend run dev`
-2. Lancer le frontend web avec `npm --prefix frontend/web run dev` ou mobile avec `npm --prefix frontend/mobile start`
-3. Tester avec les identifiants de test appropriés (admin, prof, responsable ou etudiant)
-4. Vérifier le comportement attendu
+1. 
+2. 
+3. 
 
-## Checklist de conformité Mon IUT
+## Checklist
 
-- [ ] J'ai exécuté les tests automatisés du backend avec succès (`npm test`).
-- [ ] J'ai vérifié la compilation de l'application web (`npm run build:web`).
-- [ ] Règle Zéro Emoji : aucun emoji n'a été introduit dans les vues, composants, boutons, titres ou messages d'erreur.
-- [ ] Charte graphique : les composants web utilisent strictement la palette centralisée dérivée de l'administration existante (`#f97616`, `#1e1b4b`, etc.).
-- [ ] Application mobile : aucune variable d'environnement ni fichier `.env` n'a été introduit (utilisation exclusive de `src/config/api.js`).
-- [ ] Sécurité : requêtes préparées avec `mysql2`, validation des entrées avec Zod, hachage bcrypt, vérification RBAC.
-- [ ] Aucun secret ni identifiant sensible n'est commité dans le code source.
+- [ ] J'ai testé mes changements localement.
+- [ ] Le code respecte les bonnes pratiques du README (PDO avec requêtes préparées côté backend, URLs centralisées dans `config/api.js` côté mobile).
+- [ ] Aucune donnée sensible (mot de passe, adresse IP personnelle, identifiant) n'est présente dans le code ou les commits.
+- [ ] J'ai mis à jour la documentation si nécessaire.
 
 ## Issue liée
 
-Closes # (numéro de l'issue si applicable)
+Ferme # (numéro de l'issue si applicable)
