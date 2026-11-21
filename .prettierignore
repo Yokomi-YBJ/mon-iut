@@ -1,0 +1,7 @@
+node_modules/
+dist/
+build/
+.expo/
+package-lock.json
+logs/
+uploads/
